@@ -1,0 +1,10 @@
+[workspace]
+members = ["crates/levpad-math", "programs/tilt-spot", "programs/levpad-hook", "programs/levcap", "programs/levfee", "programs/antidote-ideas", "tests"]
+resolver = "2"
+
+[profile.release]
+opt-level = "z"
+strip = true
+overflow-checks = true
+lto = "fat"
+codegen-units = 1

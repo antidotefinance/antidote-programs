@@ -1,0 +1,29 @@
+[package]
+name = "levpad-hook"
+version = "0.1.0"
+edition = "2021"
+license = "BUSL-1.1"
+publish = false
+description = "levpad oracle: Token-2022 transfer hook for coins on Meteora DBC that records the post-swap price into the engine's observation ring, and a permissionless DAMM v2 crank that keeps the same ring alive after graduation"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+
+[features]
+default = []
+no-entrypoint = []
+no-idl = []
+no-log-ix-name = []
+cpi = ["no-entrypoint"]
+idl-build = ["anchor-lang/idl-build"]
+anchor-debug = []
+custom-heap = []
+custom-panic = []
+
+[dependencies]
+solana-security-txt = "=1.1.3"
+anchor-lang = "=0.31.1"
+levpad-math = { path = "../../crates/levpad-math" }
+spl-discriminator = "0.4.1"
+spl-tlv-account-resolution = "0.9.0"
+spl-transfer-hook-interface = "0.9.0"

@@ -1,0 +1,32 @@
+[package]
+name = "levfee"
+version = "0.1.0"
+edition = "2021"
+license = "BUSL-1.1"
+publish = false
+description = "levfee: levpad's launch-fee router. Its PDA is the DBC partner fee claimer and the owner of every graduated coin's permanently locked DAMM v2 LP. Anyone cranks it: half of the income buys the platform token on market and burns it, half goes to platform-token stakers through the engine. No admin, no setters; deployed immutable."
+
+[lib]
+crate-type = ["cdylib", "lib"]
+
+[features]
+# no-idl by default, as levcap: no IDL account an authority could rewrite in the deployed program
+default = ["no-idl"]
+no-entrypoint = []
+no-idl = []
+no-log-ix-name = []
+cpi = ["no-entrypoint"]
+idl-build = ["anchor-lang/idl-build", "anchor-spl/idl-build", "tilt-spot/idl-build"]
+anchor-debug = []
+custom-heap = []
+custom-panic = []
+
+[dependencies]
+solana-security-txt = "=1.1.3"
+anchor-lang = { version = "=0.31.1", features = ["init-if-needed"] }
+anchor-spl = { version = "=0.31.1", default-features = false, features = ["token", "token_2022", "associated_token"] }
+levpad-math = { path = "../../crates/levpad-math" }
+# fund_stakers CPI and the spot engine's Config (the platform mint is read from it once, at initialize)
+tilt-spot = { path = "../tilt-spot", features = ["cpi"] }
+# venue readers (DBC / DAMM v2 offsets), the observation ring, the DAMM link
+levpad-hook = { path = "../levpad-hook", features = ["no-entrypoint"] }

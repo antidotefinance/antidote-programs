@@ -1,0 +1,20 @@
+[toolchain]
+anchor_version = "0.31.1"
+
+[features]
+resolution = true
+skip-lint = false
+
+[programs.localnet]
+tilt_spot = "5iWcJpM7vGksXq7LxusmmfpPLZNmmWxjNC8aRaFJtoE8"
+levpad_hook = "3ri134ez6K1QPUV4XMhAKeJbfhBDW55bQCoGJZL6cmxc"
+levcap = "Gq9eEG2mnAefVGtcgnmZeutUitKvZoxErxL27RALJ7U"
+levfee = "6MBSd18Ce5pEJ28qXktoxxtJEvopukTBEBCVknvTkhbM"
+antidote_ideas = "6a4WDHiWcpGV1WB8QjEoT3bxRGCHo2HnvFgiF8NW4bqz"
+
+[provider]
+cluster = "localnet"
+wallet = ".keys/local-admin.json"
+
+[scripts]
+test = "echo use cargo test"

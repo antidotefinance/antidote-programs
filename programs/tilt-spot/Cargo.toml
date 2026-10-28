@@ -1,0 +1,31 @@
+[package]
+name = "tilt-spot"
+version = "0.1.0"
+edition = "2021"
+license = "BUSL-1.1"
+publish = false
+description = "Tilt spot engine: a swap router for coins launched on the pad (Meteora DBC curve and the graduated DAMM v2 pool) that books each wallet's realized loss per coin and pays losers the platform token, capped by the platform fees they paid, minted through levcap into a lock that vests"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+
+[features]
+default = []
+no-entrypoint = []
+no-idl = []
+no-log-ix-name = []
+cpi = ["no-entrypoint"]
+idl-build = ["anchor-lang/idl-build", "anchor-spl/idl-build", "levcap/idl-build"]
+anchor-debug = []
+custom-heap = []
+custom-panic = []
+
+[dependencies]
+solana-security-txt = "=1.1.3"
+anchor-lang = { version = "=0.31.1", features = ["init-if-needed"] }
+anchor-spl = { version = "=0.31.1", default-features = false, features = ["token", "token_2022", "token_2022_extensions", "associated_token"] }
+levpad-math = { path = "../../crates/levpad-math" }
+# the platform token's capped mint authority (claims CPI its mint_to; set_platform_token reads its Cap)
+levcap = { path = "../levcap", features = ["cpi"] }
+# venue readers (DBC / DAMM v2 offsets), the DAMM link and the hook's PDAs
+levpad-hook = { path = "../levpad-hook", features = ["no-entrypoint"] }

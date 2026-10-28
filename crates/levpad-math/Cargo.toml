@@ -1,0 +1,8 @@
+[package]
+name = "levpad-math"
+version = "0.1.0"
+edition = "2021"
+publish = false
+description = "levpad perp engine math: TWAP accumulator, fills, PnL, margin, caps, fee and emission schedules. No dependencies so the program and off-chain tools share it."
+
+[dependencies]
